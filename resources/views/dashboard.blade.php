@@ -7,11 +7,30 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+                <h3 class="text-lg font-medium mb-4">Sales Overview</h3>
+                <canvas id="salesChart" height="100"></canvas>
             </div>
         </div>
     </div>
+    {{-- Add Chart.js script --}}
+    @vite('resources/js/app.js')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('salesChart');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr'],
+                    datasets: [{
+                        label: 'Sales',
+                        data: [150, 200, 170, 220],
+                        backgroundColor: '#4f46e5'
+                    }]
+                },
+            });
+        });
+    </script>
 </x-app-layout>
